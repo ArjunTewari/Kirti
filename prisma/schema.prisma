@@ -1,0 +1,94 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  TEACHER
+  STUDENT
+}
+
+enum InvoiceStatus {
+  PENDING
+  PAID
+}
+
+enum PaymentMethod {
+  RAZORPAY
+  UPI
+}
+
+enum AttendanceMarkedBy {
+  TEACHER
+  STUDENT
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(STUDENT)
+  phone     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  attendances Attendance[]
+  invoices    Invoice[]    @relation("StudentInvoices")
+}
+
+model ClassEvent {
+  id          String    @id @default(cuid())
+  title       String
+  description String?
+  date        DateTime
+  amount      Float
+  cancelledAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  attendances Attendance[]
+  invoices    Invoice[]
+}
+
+model Attendance {
+  id           String             @id @default(cuid())
+  student      User               @relation(fields: [studentId], references: [id])
+  studentId    String
+  classEvent   ClassEvent         @relation(fields: [classEventId], references: [id])
+  classEventId String
+  markedBy     AttendanceMarkedBy
+  createdAt    DateTime           @default(now())
+
+  @@unique([studentId, classEventId])
+}
+
+model Invoice {
+  id                String         @id @default(cuid())
+  student           User           @relation("StudentInvoices", fields: [studentId], references: [id])
+  studentId         String
+  classEvent        ClassEvent     @relation(fields: [classEventId], references: [id])
+  classEventId      String
+  amount            Float
+  status            InvoiceStatus  @default(PENDING)
+  paidAt            DateTime?
+  paymentMethod     PaymentMethod?
+  razorpayOrderId   String?
+  razorpayPaymentId String?
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+
+  @@unique([studentId, classEventId])
+}
+
+model Announcement {
+  id        String   @id @default(cuid())
+  title     String
+  body      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
