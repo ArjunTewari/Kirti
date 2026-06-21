@@ -27,7 +27,7 @@
 - Cancel event → WhatsApp notification to booked students
 - Students can book / cancel a spot from their portal
 - Kirti sees live headcount per class
-- Status: pending
+- Status: completed ✅
 - Depends on: T03
 
 ### T05 — Attendance marking (Teacher + Student)
