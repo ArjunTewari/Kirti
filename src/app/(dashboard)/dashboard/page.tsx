@@ -96,7 +96,7 @@ export default async function DashboardPage() {
                     </p>
                   </div>
                   <span className="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">
-                    ₹{c.amount}
+                    {c.capacity} seats
                   </span>
                 </li>
               ))}

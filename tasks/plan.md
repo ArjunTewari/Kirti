@@ -18,33 +18,38 @@
 ### T03 — Teacher dashboard shell
 - Layout with sidebar nav: Overview, Classes, Students, Invoices, Announcements
 - Overview stats: total students, pending invoices count, this month revenue
-- Status: pending
+- Status: completed ✅
 - Depends on: T01
 
-### T04 — Class event CRUD (Teacher)
-- Create/edit/cancel class events (title, date, time, description, amount per student)
-- Class list view + upcoming calendar strip
+### T04 — Class event CRUD + booking (Teacher & Student)
+- Create/edit/cancel class events: title, date, time, description, capacity (max seats)
+- Class list view with headcount (booked / capacity)
+- Cancel event → WhatsApp notification to booked students
+- Students can book / cancel a spot from their portal
+- Kirti sees live headcount per class
 - Status: pending
 - Depends on: T03
 
-### T05 — Attendance marking (Teacher side)
-- After selecting a class event, show student checklist
-- Mark/unmark attended per student
+### T05 — Attendance marking (Teacher + Student)
+- After class, Kirti marks attendance from booked-student checklist
+- Students can self-mark attendance from portal
 - Save attendance records
 - Status: pending
 - Depends on: T04
 
-### T06 — Invoice generation
-- API: generate invoices for all attendees of a class event
-- Teacher can trigger "Generate Invoices" button after class
-- Invoice list in teacher dashboard with filters (pending/paid)
-- Mark UPI payment as received (manual)
+### T06 — Invoice generation (Monthly subscription + Registration)
+- Payment model: monthly subscription (8 classes/month) + one-time registration fee
+- Kirti generates monthly invoices for all active students in one click
+- Registration invoice auto-generated when Kirti adds a student
+- Invoice list with filters (pending/paid, REGISTRATION/MONTHLY)
+- Kirti manually marks UPI payments as received
 - Status: pending
 - Depends on: T05
 
 ### T07 — Student portal shell
-- Layout: Pending Invoices, Payment History, My Classes, Announcements
-- Student can mark own attendance for a class
+- Layout: Book Classes, Pending Invoices, Payment History, Announcements, Attendance
+- Student books / cancels class spots
+- Student sees own invoice history and attendance record
 - Status: pending
 - Depends on: T01
 
@@ -55,18 +60,21 @@
 - Status: pending
 - Depends on: T06, T07
 
-### T09 — WhatsApp reminders (Twilio)
-- Send WhatsApp message to student phone after invoice is generated
-- Message: class name, amount due, payment link
-- Bulk send from teacher dashboard per class event
-- Manual reminder button per student in invoice list
+### T09 — WhatsApp reminders (Twilio) — VERY IMPORTANT
+Two types:
+- Class reminders: Kirti sends upcoming class info to all / booked students
+  (message: class title, date, time)
+- Payment reminders: students with pending invoices
+  (message: month, amount, payment link)
+- Manual trigger per-class or bulk; also auto-trigger on invoice generation
 - Status: pending
 - Depends on: T06
 
 ### T10 — Student management (Teacher)
-- Add student manually (name, email, phone, password)
+- Add student manually (name, email, phone, temp password)
+- Auto-generate registration invoice on add
 - Student self-registration page
-- Student list with payment status badge
+- Student list with subscription status badge
 - Status: pending
 - Depends on: T03
 
