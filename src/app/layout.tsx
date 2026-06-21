@@ -1,9 +1,22 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Lora, Raleway } from "next/font/google";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
+const lora = Lora({
+  subsets: ["latin"],
+  variable: "--font-lora",
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const raleway = Raleway({
+  subsets: ["latin"],
+  variable: "--font-raleway",
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Kirti Yoga",
@@ -12,8 +25,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geist.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-sans">
+    <html lang="en" className={`${lora.variable} ${raleway.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col" style={{ fontFamily: "var(--font-raleway, system-ui)" }}>
         <SessionProvider>{children}</SessionProvider>
       </body>
     </html>
