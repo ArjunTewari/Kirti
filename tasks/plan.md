@@ -8,7 +8,7 @@
 - Two roles: TEACHER, STUDENT
 - Protected route middleware
 - Login page (shared), redirect by role
-- Status: pending
+- Status: completed ✅
 
 ### T02 — Database seed
 - Seed script: create Kirti's teacher account + 3 sample students
