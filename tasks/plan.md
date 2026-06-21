@@ -12,7 +12,7 @@
 
 ### T02 — Database seed
 - Seed script: create Kirti's teacher account + 3 sample students
-- Status: pending
+- Status: completed ✅
 - Depends on: T01
 
 ### T03 — Teacher dashboard shell
