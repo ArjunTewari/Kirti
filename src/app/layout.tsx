@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Lora, Raleway } from "next/font/google";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
@@ -21,6 +21,12 @@ const raleway = Raleway({
 export const metadata: Metadata = {
   title: "Kirti Yoga",
   description: "Yoga class management for teachers and students",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  // do NOT set maximumScale — let users zoom for accessibility
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

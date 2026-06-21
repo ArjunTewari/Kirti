@@ -116,6 +116,11 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 8px 28px rgba(44, 62, 48, 0.11);
 }
 
+/* ── iOS input zoom fix: font-size must be >= 16px ─ */
+input, select, textarea {
+  font-size: 16px;
+}
+
 /* ── Scrollbar (subtle) ─────────────────────────── */
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
